@@ -4,6 +4,7 @@ from pickle import load
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from flask import Flask, render_template, request
+from sklearn.ensemble import RandomForestClassifier
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -23,6 +24,7 @@ def process_text(text):
       txt.append(word)
 
   return " ".join(txt)
+
 
 @app.route('/')
 def home():
