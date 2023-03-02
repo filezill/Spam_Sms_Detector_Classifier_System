@@ -6,6 +6,7 @@ from pickle import load
 import warnings
 warnings.filterwarnings('ignore')
 from flask import Flask, render_template, request
+from sklearn.ensemble import RandomForestClassifier
 
 rF_model = load(open('model/randomF_classiF.bin', 'rb'))
 tfidf_Vec = load(open('model/tfidf_Vec.bin', 'rb'))
