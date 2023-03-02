@@ -3,8 +3,7 @@ import numpy as np
 from pickle import load
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
-from flask import Flask, render_template, request
-from sklearn.ensemble import RandomForestClassifier
+from flask import Flask, render_template, request, redirect, url_for
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -25,7 +24,6 @@ def process_text(text):
 
   return " ".join(txt)
 
-
 @app.route('/')
 def home():
   return render_template('index.html')
@@ -43,8 +41,7 @@ def detect():
     output = "Not Spam" if output[0] == 0 else "Spam"
 
     return render_template('index.html', show_hidden=True, output=output)
-  else:
-    return render_template('index.html', show_hidden=False)
+  return redirect(url_for('home'))
 
 
 @app.route('/about')
@@ -66,7 +63,7 @@ def feedback_mail(message):
     message = message + "\nUTC time: " + datetime.isoformat(datetime.utcnow())
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    s.login("feedbackmovierecommender@gmail.com", "frsrluyhmybhzbep")
+    s.login("feedbackmovierecommender@gmail.com", "suixoyqcouckzhvi")
     s.sendmail("feedbackmovierecommender@gmail.com", "deltagon@protonmail.com", message)
     s.quit()
 
@@ -81,10 +78,8 @@ def fetch_feedback():
         feedback_mail(f"[Spam Detector Feedback Bot]\nName- {name}\nMail- {email}\nFeedback- {message}")
 
         return render_template('contact.html', tnx_feedback="Thank you for feedback!")
-    return render_template('contact.html')
+    return redirect(url_for('contact_load'))
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
