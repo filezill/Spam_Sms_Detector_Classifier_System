@@ -1,6 +1,6 @@
 flask
 numpy
 nltk
-sklearn
+scikit-learn
 pickle5
 gunicorn
