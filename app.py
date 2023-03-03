@@ -13,8 +13,8 @@ tfidf_Vec = load(open('model/tfidf_Vec.bin', 'rb'))
 app = Flask(__name__)
 
 
-nltk.download('punkt')
-nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('stopwords')
 
 def process_text(text):
   txt = []
