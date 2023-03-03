@@ -13,6 +13,9 @@ tfidf_Vec = load(open('model/tfidf_Vec.bin', 'rb'))
 app = Flask(__name__)
 
 
+nltk.download('punkt')
+nltk.download('stopwords')
+
 def process_text(text):
   txt = []
   ps = PorterStemmer()  
@@ -83,5 +86,3 @@ def fetch_feedback():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
